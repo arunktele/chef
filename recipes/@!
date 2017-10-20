@@ -1,0 +1,29 @@
+#file stored in chef-repo/cookbooks/test/files
+cookbook_file '/home/blade/config.yml' do
+        source 'config.yml'
+        action :create
+end
+test_vlanresource '19' do
+	vlan 19
+	vlan_name 'test19'
+	admin_state 'up'
+end
+
+=begin
+test_vlanresource '19' do
+	vlan 19
+	vlan_name 'changedname>>>>'
+	admin_state 'up'
+end
+
+test_vlanresource '14' do
+	action :delete
+	vlan 14
+end
+
+test_vlanresource '15' do
+	vlan 15
+	vlan_name 'test15'
+	admin_state 'up'
+end
+=end
