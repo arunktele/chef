@@ -14,12 +14,13 @@
 # Cookbook:: cnos
 # Recipe:: default
 
-# TODO: you should put a guard around this for non debian based OSes. Or add to the readme that only Debian based operating systems are supported
 
 # Upgrade client machine
-execute 'update-upgrade' do
-  command 'apt-get update && apt-get upgrade -y'
-  action :run
+if platform?('debian', 'ubuntu')
+ execute 'update-upgrade' do
+   command 'apt-get update && apt-get upgrade -y'
+   action :run
+ end
 end
 
 # Install rest-client
@@ -28,7 +29,6 @@ chef_gem 'rest-client' do
 end
 require 'rest-client'
 
-# TODO: you should really push this to rubygems
 # Install LenovoCheflib
 chef_gem 'LenovoCheflib' do
   action :install

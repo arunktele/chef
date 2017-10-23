@@ -19,12 +19,12 @@
 
 # Configure IP interface on switch
 cnos_ipIntf '1' do
-  file 'switch.yml'
-  if_name 'Ethernet1/1'
-  bridge_port 'yes'
-  mtu '1500'
-  ip_addr '0.0.0.0'
-  ip_prefix_len 0
-  vrf_name 'default'
-  admin_state 'up'
+  file           node['cnos']['file']
+  if_name        'Ethernet1/1'
+  bridge_port    node['cnos']['bridge_port']
+  mtu            node['cnos']['mtu']
+  ip_addr        node['cnos']['ip_addr']
+  ip_prefix_len  node['cnos']['ip_prefix_len']
+  vrf_name       node['cnos']['vrf_name']
+  admin_state 	 node['cnos']['admin_state']
 end

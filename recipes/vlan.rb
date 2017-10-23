@@ -19,24 +19,16 @@
 
 # VLAN config for switch
 cnos_vlan '21' do
-  file 'switch.yml'
-  vlan 21
-  vlan_name 'vlan21'
-  admin_state 'up'
-  type 'create'
-end
-
-cnos_vlan '29' do
-  file 'switch.yml'
-  vlan 29
-  vlan_name 'Vlan29'
-  admin_state 'up'
-  type 'create'
+  file        node['cnos']['file']
+  vlan        21
+  vlan_name   'vlan21'
+  admin_state node['cnos']['admin_state']
+  type        'create'
 end
 
 # Delete VLAN
 cnos_vlan '21' do
   action :delete
-  file 'switch.yml'
+  file node['cnos']['file']
   vlan 21
 end

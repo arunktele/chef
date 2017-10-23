@@ -19,7 +19,7 @@
 
 # Config vlan for interface on switch
 cnos_vlanIntf 'Ethernet1/1' do
-  file 'switch.yml'
+  file node['cnos']['file']
   interface 'Ethernet1/1'
   bridgeport_mode 'trunk'
   pvid 1
@@ -27,7 +27,7 @@ cnos_vlanIntf 'Ethernet1/1' do
 end
 
 cnos_vlanIntf 'Ethernet1/2' do
-  file 'switch.yml'
+  file node['cnos']['file']
   interface 'Ethernet1/2'
   bridgeport_mode 'trunk'
   pvid 1

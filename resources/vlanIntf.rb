@@ -44,7 +44,7 @@ default_action :create
 #           end
 
 action :create do
-  filename = '/home/chef/' + file # TODO: having this hard coded for /home/chef is a bad idea, most users use _their_ home directory
+  filename = "#{ENV['HOME']}/" + file 
   switch = Connect.new(filename)
   params = { 'if_name' => interface,
              'bridgeport_mode' => bridgeport_mode,

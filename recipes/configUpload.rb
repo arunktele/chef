@@ -19,11 +19,11 @@
 
 # Upload Config as running config to TFTP server
 cnos_swConfig 'config' do
-  file 'switch.yml'
-  type 'upload'
-  protocol 'tftp' # TODO: this should be an attribute, assuming you can have something other then tftp
-  serverip '192.168.1.1' # TODO: this should be an attribute
-  srcfile 'running_config' # TODO: this should be an attribute
-  dstfile 'switch.conf'
-  vrf_name 'management'
+  file      node['cnos']['file']
+  type     'upload'
+  protocol  node['cnos']['protocol'] 
+  serverip  node['cnos']['tftp_server']
+  srcfile  'running_config' # TODO: this should be an attribute
+  dstfile   node['cnos']['switch_conf']
+  vrf_name  node['cnos']['vrf_name']
 end

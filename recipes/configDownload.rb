@@ -19,11 +19,13 @@
 
 # Download Config as running config from TFTP server
 cnos_swConfig 'config' do
-  file 'switch.yml'
-  type 'download'
-  protocol 'tftp' # TODO: this should be an attribute, assuming you can have something other then tftp
-  serverip '192.168.1.1' # TODO: this should be an attribute
-  srcfile 'switch.conf' # TODO: this should be an attribute
-  dstfile 'running_config'
-  vrf_name 'management'
+  file     node['cnos']['file']
+  type     'download'
+  protocol node['cnos']['protocol']
+  serverip node['cnos']['tftp_server'] 
+  srcfile  node['cnos']['switch_conf'] # TODO: this should be an attribute
+  # DOUBT - In the case of different conf files for different switches,
+  #	    the file name might vary. Should this still be set as an attribute?
+  dstfile  'running_config'
+  vrf_name node['cnos']['vrf_name']
 end

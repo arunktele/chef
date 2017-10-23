@@ -15,24 +15,23 @@
 # Recipe   : imgDownload
 # Config files stored in chef-repo/cookbooks/cnos/files
 
-# TODO: you can't assume the username chef will be here. You should figure out a way to transfer this file more dynamically
 # transfer Config files for switches to client
-cookbook_file '/home/chef/switch.yml' do
+cookbook_file "#{ENV['HOME']}/" + node['cnos']['file'] do
   source 'switch.yml'
   action :create
 end
 
 # Download Image from TFTP server
 cnos_downloadImage 'image' do
-  file     'switch.yml'
-  protocol 'tftp' # TODO: this should be an attribute, assuming you can have something other then tftp
-  serverip '192.168.1.1' # TODO: this should be an attribute
+  file     node['cnos']['file']
+  protocol node['cnos']['protocol']
+  serverip node['cnos']['tftp_server']
   srcfile  'G8296-CNOS-10.4.2.0.img'
   imgtype  'all'
-  vrf_name 'management'
+  vrf_name node['cnos']['vrf_name']
 end
 
 # Reset the switch
 cnos_resetSwitch 'reset' do
-  file     'switch.yml'
+  file     node['cnos']['file']
 end

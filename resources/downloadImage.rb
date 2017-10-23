@@ -43,7 +43,7 @@ end
 #	    end
 
 action :create do
-  filename = '/home/chef/' + file # TODO: having this hard coded for /home/chef is a bad idea, most users use _their_ home directory
+  filename = "#{ENV['HOME']}/" + file 
   switch = Connect.new(filename)
   if protocol == 'sftp'
     params = { 'protocol' => protocol,
@@ -67,7 +67,7 @@ action :create do
       sleeptime = 10 if sleeptime > 11
     end
     if resp['status'] == 'successful'
-      puts 'Transfer status >> ' + resp['status']
+      Chef::Log.info 'Transfer status >> ' + resp['status']
       params = { 'boot software' => 'standby' }
       System.put_startup_sw(switch, params)
     else
@@ -96,7 +96,7 @@ action :create do
       sleeptime /= 2 if sleeptime > 10
     end
     if resp['status'] == 'successful'
-      puts 'Transfer status >> ' + resp['status']
+      Chef::Log.info 'Transfer status >> ' + resp['status']
       params = {
         'boot software' => 'standby'
       }
