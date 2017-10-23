@@ -1,20 +1,20 @@
-##
-## Copyright (C) 2017 Lenovo, Inc.
-## Licensed under the Apache License, Version 2.0 (the "License"); 
-## you may not use this file except in compliance with the License. 
-## You may obtain a copy of the License at 
-##       http://www.apache.org/licenses/LICENSE-2.0
-##
-## Unless required by applicable law or agreed to in writing, software 
-## distributed under the License is distributed on an "AS IS" BASIS, 
-## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-## See the License for the specific language governing permissions and 
-## limitations under the License.
-##
+#
+# Copyright (C) 2017 Lenovo, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 property :vlan, Integer, name_property: true
 property :vlan_name, String
-property :admin_state,String
+property :admin_state, String
 property :file, String
 property :type, String
 
@@ -22,13 +22,11 @@ property :type, String
 default_action :create
 
 begin
-	require 'LenovoCheflib/connect'
-	require 'LenovoCheflib/vlan'
+  require 'LenovoCheflib/connect'
+  require 'LenovoCheflib/vlan'
 rescue LoadError
-	Chef::Log.debug 'Failed to require rubygem'
-end 
-
-
+  Chef::Log.debug 'Failed to require rubygem'
+end
 
 # This resource are used to create vlan, update and delete vlan
 # Example - cnos_vlan '21' do
@@ -39,21 +37,25 @@ end
 #		type 'create'
 #	    end
 action :create do
-	filename = '/home/chef/' + file
-	switch = Connect.new(filename)
-	if type == 'create'
-		params = {"vlan_name" => vlan_name, "vlan_id" => vlan, "admin_state" => admin_state}
-  		Vlan.create_vlan(switch, params)
-	end
-	if type == 'update'
-		params = {"vlan_name" => vlan_name, "vlan_id" => vlan, "admin_state" => admin_state}
-		Vlan.update_vlan(switch, params)
-	end
+  filename = '/home/chef/' + file # TODO: having this hard coded for /home/chef is a bad idea, most users use _their_ home directory
+  switch = Connect.new(filename)
+  if type == 'create'
+    params = { 'vlan_name' => vlan_name,
+               'vlan_id' => vlan,
+               'admin_state' => admin_state }
+    Vlan.create_vlan(switch, params)
+  end
+  if type == 'update'
+    params = { 'vlan_name' => vlan_name,
+               'vlan_id' => vlan,
+               'admin_state' => admin_state }
+    Vlan.update_vlan(switch, params)
+  end
 end
 
-#delete vlan
+# delete vlan
 action :delete do
-	filename = '/home/chef/' + file
-	switch = Connect.new(filename)
-	Vlan.delete_vlan(switch, vlan)
+  filename = '/home/chef/' + file
+  switch = Connect.new(filename)
+  Vlan.delete_vlan(switch, vlan)
 end
