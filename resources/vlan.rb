@@ -37,7 +37,7 @@ end
 #		type 'create'
 #	    end
 action :create do
-  filename = "#{ENV['HOME']}/" + file 
+  filename = "#{ENV['HOME']}/" + file
   switch = Connect.new(filename)
   if type == 'create'
     params = { 'vlan_name' => vlan_name,

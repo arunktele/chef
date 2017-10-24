@@ -33,7 +33,7 @@ end
 
 # The resources downloads image from the TFTP server using tftp or sftp
 # Waits for the image to be downloaded and resets the switch
- # Example - cnos_downloadImage 'image' do
+# Example - cnos_downloadImage 'image' do
 #        	file     '<config file>'
 #        	protocol 'tftp'
 #        	serverip '<IP ADDRESS>'

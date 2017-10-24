@@ -15,16 +15,14 @@
 # Recipe   : ip_intf
 # Config files stored in chef-repo/cookbooks/cnos/files
 
-# TODO: these all should be attributes so you can over ride them
-
 # Configure IP interface on switch
 cnos_ipIntf '1' do
-  file           node['cnos']['file']
-  if_name        'Ethernet1/1'
-  bridge_port    node['cnos']['bridge_port']
-  mtu            node['cnos']['mtu']
-  ip_addr        node['cnos']['ip_addr']
-  ip_prefix_len  node['cnos']['ip_prefix_len']
-  vrf_name       node['cnos']['vrf_name']
-  admin_state 	 node['cnos']['admin_state']
+  file          node['cnos']['file']
+  if_name       'Ethernet1/1'
+  bridge_port   node['cnos']['bridge_port']
+  mtu           node['cnos']['mtu']
+  ip_addr       node['cnos']['ip_addr']
+  ip_prefix_len node['cnos']['ip_prefix_len']
+  vrf_name      node['cnos']['vrf_name']
+  admin_state 	node['cnos']['admin_state']
 end

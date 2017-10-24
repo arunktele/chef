@@ -26,7 +26,7 @@ cnos_downloadImage 'image' do
   file     node['cnos']['file']
   protocol node['cnos']['protocol']
   serverip node['cnos']['tftp_server']
-  srcfile  'G8296-CNOS-10.4.2.0.img'
+  srcfile  node['cnos']['nos_image']
   imgtype  'all'
   vrf_name node['cnos']['vrf_name']
 end

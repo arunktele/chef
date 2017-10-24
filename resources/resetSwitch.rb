@@ -34,5 +34,5 @@ action :create do
   filename = "#{ENV['HOME']}/" + file 
   switch = Connect.new(filename)
   System.reset_switch(switch)
-  Chef::Log.info "\n\n>>>>>>>>>>>>>>>>>>>Reset Switch " + switch.getIp + ' in progress<<<<<<<<<<<<<<<<<<<<<<'
+  Chef::Log.info "\n\n>>>Reset Switch " + switch.getIp + ' in progress<<<'
 end
