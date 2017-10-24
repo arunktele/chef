@@ -11,8 +11,7 @@ configurations and VLAN provisioning. The recipes use the CNOS Ruby APIs
 Below is the list of recipe instances provided as a part of the CNOS cookbook.
 
 1. configUpload
-This recipe uploads configuration to the switches.<br />
-<br />
+This recipe uploads configuration to the switches.<br /><br />
 Example - using attributes 
 ```
 s_swConfig 'config' do
@@ -41,8 +40,7 @@ end
 ```
 2. configDownload
 This recipe downloads configuration to the switches. The same configuration
-can be edited/modified and uploaded back using the configUpload recipe. <br />
-<br />
+can be edited/modified and uploaded back using the configUpload recipe. <br /><br />
 Example - using attributes
 ```
 cnos_swConfig 'config' do
@@ -70,8 +68,7 @@ end
 
 ```
 3. imgUpload
-This recipe upload new OS image to the switch.<br />
-<br />
+This recipe upload new OS image to the switch. <br /><br />
 Example - using attributes
 ```
 cnos_downloadImage 'image' do
@@ -96,8 +93,7 @@ end
 
 ```
 4. vlan
-This recipe manages the VLAN (create/update/delete) provisiong on the switch.<br />
-<br />
+This recipe manages the VLAN (create/update/delete) provisiong on the switch.<br /><br />
 Example - using attributes
 ```
 s_vlan '21' do
@@ -120,8 +116,7 @@ end
 ```
 5. vlanIntf
 This recipe provides the management of VLAN properties for ethernet and
-port-channel interfaces.<br />
-<br />
+port-channel interfaces.<br /><br />
 Example - using attributes
 ```
 cnos_vlanIntf 'Ethernet1/1' do
@@ -143,8 +138,7 @@ cnos_vlanIntf 'Ethernet1/1' do
 end
 ```
 6. ipIntf
-This recipe provides the management of IP interfaces.<br />
-<br />
+This recipe provides the management of IP interfaces.<br /><br />
 Example - using attributes
 ```
 cnos_ipIntf '1' do
