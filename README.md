@@ -173,7 +173,7 @@ Note - All the above recipes require the config file to reside on the client. Yo
 
 ## Running the cookbook
 1. Install chef-client on the node
-2. Install Lenovo CNOS Ruby GEM in the same node(or include in default recipe). # TODO: Please remove the gem from this cookbook, either publish to rubygems or something else. Binaries aren't supposed to be in cookbooks, it causes long term issues
+2. Install Lenovo CNOS Ruby GEM in the same node(or include in default recipe).
 3. Create and transfer using recipe switch.yml for each Lenovo device to be configured using the work
    station, see below example file
 ```
