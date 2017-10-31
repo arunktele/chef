@@ -25,8 +25,8 @@ property :ip_prefix_len, Integer
 default_action :create
 
 begin
-  require 'LenovoCheflib/connect'
-  require 'LenovoCheflib/ip_intf'
+  require 'cnos-rbapi/connect'
+  require 'cnos-rbapi/ip_intf'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end

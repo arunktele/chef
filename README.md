@@ -219,7 +219,7 @@ password : '<password>' #Credentials
 The cookbook was originally tested direclty on a Ubuntu 16.04 VM, set up as client.
 In the setup,
 1. A config file 'switch.yml' was created on the workstation and transferred to the client using recipe.
-2. 'LenovoCheflib' gem was installed using recipe(default.rb)
+2. 'cnos-rbapi' gem was installed using recipe(default.rb)
 3. Image download, Switch config and Vlan Config recipes(given as instances above) were tested on the VM and the configurations were verified.
 
 Test tools such as Test kitchen or ChefSpec can also be used to run test recipes on the workstation

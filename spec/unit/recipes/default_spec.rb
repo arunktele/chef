@@ -22,8 +22,8 @@ describe 'test::default' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
-    it 'installs LenovoCheflib as gem' do
-      expect(chef_run).to install_chef_gem('LenovoCheflib')
+    it 'installs cnos-rbapi as gem' do
+      expect(chef_run).to install_chef_gem('cnos-rbapi')
     end	 
     it 'installs rest-client as a chef gem' do
       expect(chef_run).to install_chef_gem('rest-client')

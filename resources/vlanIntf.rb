@@ -22,8 +22,8 @@ property :vlans, Array
 default_action :create
 
 begin
-  require 'LenovoCheflib/connect'
-  require 'LenovoCheflib/vlan_intf'
+  require 'cnos-rbapi/connect'
+  require 'cnos-rbapi/vlan_intf'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end

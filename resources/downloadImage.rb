@@ -25,8 +25,8 @@ property :file, String
 default_action :create
 
 begin
-  require 'LenovoCheflib/connect'
-  require 'LenovoCheflib/system'
+  require 'cnos-rbapi/connect'
+  require 'cnos-rbapi/system'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end

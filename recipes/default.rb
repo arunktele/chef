@@ -28,8 +28,8 @@ chef_gem 'rest-client' do
 end
 require 'rest-client'
 
-# Install LenovoCheflib
-chef_gem 'LenovoCheflib' do
+# Install cnos-rbapi
+chef_gem 'cnos-rbapi' do
   action :install
 end
-require 'LenovoCheflib'
+require 'cnos-rbapi'
