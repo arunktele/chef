@@ -1,4 +1,4 @@
-name             'cnos'
+name             'chef-cnos'
 maintainer       'Lenovo'
 maintainer_email 'cbhagavathip@lenovo.com'
 license          'Apache v2.0'
