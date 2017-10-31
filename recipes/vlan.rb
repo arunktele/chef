@@ -15,8 +15,6 @@
 # Recipe   : vlan
 # Config files stored in chef-repo/cookbooks/cnos/files
 
-# TODO: these should be attributes, and also as examples in documentation not in the actual cookbook
-
 # VLAN config for switch
 cnos_vlan '21' do
   file        node['cnos']['file']

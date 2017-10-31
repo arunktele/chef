@@ -44,7 +44,7 @@ end
 #	    end
 
 action :create do
-  filename = "#{ENV['HOME']}/" + file 
+  filename = "#{ENV['HOME']}/" + file
   switch = Connect.new(filename)
   if type == 'download'
     if protocol == 'tftp'
@@ -112,7 +112,7 @@ action :create do
       end
       Chef::Log.info 'Config transfer status ' + switch.getIp + ' >>>> ' + resp['status']
     else
-      parrams = { 'protocol' => protocol,
+      params = { 'protocol' => protocol,
                   'serverip' => serverip,
                   'srcfile' => srcfile,
                   'dstfile' => dstfile,

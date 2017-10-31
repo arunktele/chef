@@ -55,7 +55,7 @@ end
 
 # delete vlan
 action :delete do
-  filename = '/home/chef/' + file
+  filename = "#{ENV['HOME']}/" + file
   switch = Connect.new(filename)
   Vlan.delete_vlan(switch, vlan)
 end

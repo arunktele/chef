@@ -10,9 +10,10 @@ configurations and VLAN provisioning. The recipes use the CNOS Ruby APIs
 
 Below is the list of recipe instances provided as a part of the CNOS cookbook.
 
-1. configUpload
+### 1. configUpload
 This recipe uploads configuration to the switches.<br /><br />
-Example - using attributes 
+Example - using attributes
+
 ```
 s_swConfig 'config' do
   file     node['cnos']['file']
@@ -25,7 +26,9 @@ s_swConfig 'config' do
 end
 
 ```
+
 Example - using values
+
 ```
 cnos_swConfig 'config' do
         file 'switch.yml'
@@ -36,25 +39,29 @@ cnos_swConfig 'config' do
         dstfile 'switch.conf'
         vrf_name 'management'
 end
-
 ```
-2. configDownload
+
+### 2. configDownload
+
 This recipe downloads configuration to the switches. The same configuration
 can be edited/modified and uploaded back using the configUpload recipe. <br /><br />
+
 Example - using attributes
+
 ```
 cnos_swConfig 'config' do
   file     node['cnos']['file']
   type     'download'
   protocol node['cnos']['protocol']
   serverip node['cnos']['tftp_server']
-  srcfile  node['cnos']['switch_conf'] 
+  srcfile  node['cnos']['switch_conf']
   dstfile  'running_config'
   vrf_name node['cnos']['vrf_name']
 end
-
 ```
-Example - using values 
+
+Example - using values
+
 ```
 cnos_swConfig 'config' do
         file 'switch.yml'
@@ -65,11 +72,13 @@ cnos_swConfig 'config' do
         dstfile 'running_config'
         vrf_name 'management'
 end
-
 ```
-3. imgUpload
+
+### 3. imgUpload
 This recipe upload new OS image to the switch. <br /><br />
+
 Example - using attributes
+
 ```
 cnos_downloadImage 'image' do
   file     node['cnos']['file']
@@ -80,7 +89,9 @@ cnos_downloadImage 'image' do
   vrf_name node['cnos']['vrf_name']
 end
 ```
+
 Example - using values
+
 ```
 s_downloadImage 'image' do
         file     'switch.yml'
@@ -90,13 +101,15 @@ s_downloadImage 'image' do
         imgtype  'all'
         vrf_name 'management'
 end
+```
+
+### 4. vlan
+This recipe manages the VLAN (create/update/delete) provisiong on the switch.<br /><br />
+
+Example - using attributes
 
 ```
-4. vlan
-This recipe manages the VLAN (create/update/delete) provisiong on the switch.<br /><br />
-Example - using attributes
-```
-s_vlan '21' do
+cnos_vlan '21' do
   file        node['cnos']['file']
   vlan        21
   vlan_name   'vlan21'
@@ -104,7 +117,9 @@ s_vlan '21' do
   type        'create'
 end
 ```
+
 Example - using values
+
 ```
 cnos_vlan '21' do
         file 'switch.yml'
@@ -114,10 +129,14 @@ cnos_vlan '21' do
         type 'create'
 end
 ```
-5. vlanIntf
+
+### 5. vlanIntf
+
 This recipe provides the management of VLAN properties for ethernet and
 port-channel interfaces.<br /><br />
+
 Example - using attributes
+
 ```
 cnos_vlanIntf 'Ethernet1/1' do
   file            node['cnos']['file']
@@ -127,7 +146,9 @@ cnos_vlanIntf 'Ethernet1/1' do
   vlans           [20, 21]
 end
 ```
+
 Example - using values
+
 ```
 cnos_vlanIntf 'Ethernet1/1' do
         file 'switch.yml'
@@ -137,9 +158,12 @@ cnos_vlanIntf 'Ethernet1/1' do
         vlans [20,21]
 end
 ```
-6. ipIntf
+### 6. ipIntf
+
 This recipe provides the management of IP interfaces.<br /><br />
+
 Example - using attributes
+
 ```
 cnos_ipIntf '1' do
   file          node['cnos']['file']
@@ -152,7 +176,9 @@ cnos_ipIntf '1' do
   admin_state   node['cnos']['admin_state']
 end
 ```
+
 Example - using values
+
 ```
 cnos_ipIntf '1' do
         file 'switch.yml'
@@ -165,17 +191,19 @@ cnos_ipIntf '1' do
         admin_state 'up'
 end
 ```
-Note - All the above recipes require the config file to reside on the client. You can also create one at the workstation and transfer to the client using chef resources in a recipe
+
+**Note** - All the above recipes require the config file to reside on the client. You can also create one at the workstation and transfer to the client using chef resources in a recipe
 
 ## Dependencies
-  * Chef 13 or later
-  * Lenovo CNOS 10.4 or later
+* Chef 13 or later
+* Lenovo CNOS 10.4 or later
 
 ## Running the cookbook
 1. Install chef-client on the node
-2. Install Lenovo CNOS Ruby GEM in the same node(or include in default recipe). # TODO: Please remove the gem from this cookbook, either publish to rubygems or something else. Binaries aren't supposed to be in cookbooks, it causes long term issues
+2. Install Lenovo CNOS Ruby GEM in the same node(or include in default recipe).
 3. Create and transfer using recipe switch.yml for each Lenovo device to be configured using the work
    station, see below example file
+
 ```
 transport : 'http' #http or https
 port : '8090' #8090 or 443
@@ -188,7 +216,7 @@ password : '<password>' #Credentials
 6. Upload to the run-list of the chef-server and configure the devices
 
 ## Testing
-The cookbook was originally tested direclty on a Ubuntu 16.04 VM, set up as client. 
+The cookbook was originally tested direclty on a Ubuntu 16.04 VM, set up as client.
 In the setup,
 1. A config file 'switch.yml' was created on the workstation and transferred to the client using recipe.
 2. 'LenovoCheflib' gem was installed using recipe(default.rb)
@@ -198,7 +226,7 @@ Test tools such as Test kitchen or ChefSpec can also be used to run test recipes
 
 
 ## Contributors
-  * Lenovo DCG Networking, Lenovo
+* Lenovo DCG Networking, Lenovo
 
 ## License
 Apache 2.0, See LICENSE file
