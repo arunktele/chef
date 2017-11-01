@@ -14,8 +14,8 @@ Below is the list of recipe instances provided as a part of the CNOS cookbook.
 This recipe uploads configuration to the switches.<br /><br />
 Example - using attributes
 
-```
-s_swConfig 'config' do
+```ruby
+cnos_swConfig 'config' do
   file     node['cnos']['file']
   type     'upload'
   protocol node['cnos']['protocol']
@@ -24,20 +24,19 @@ s_swConfig 'config' do
   dstfile  node['cnos']['switch_conf']
   vrf_name node['cnos']['vrf_name']
 end
-
 ```
 
 Example - using values
 
-```
+```ruby
 cnos_swConfig 'config' do
-        file 'switch.yml'
-        type 'upload'
-        protocol 'tftp'
-        serverip '192.168.1.1'
-        srcfile 'running_config'
-        dstfile 'switch.conf'
-        vrf_name 'management'
+  file 'switch.yml'
+  type 'upload'
+  protocol 'tftp'
+  serverip '192.168.1.1'
+  srcfile 'running_config'
+  dstfile 'switch.conf'
+  vrf_name 'management'
 end
 ```
 
@@ -48,7 +47,7 @@ can be edited/modified and uploaded back using the configUpload recipe. <br /><b
 
 Example - using attributes
 
-```
+```ruby
 cnos_swConfig 'config' do
   file     node['cnos']['file']
   type     'download'
@@ -62,15 +61,15 @@ end
 
 Example - using values
 
-```
+```ruby
 cnos_swConfig 'config' do
-        file 'switch.yml'
-        type 'download'
-        protocol 'tftp'
-        serverip '192.168.1.1'
-        srcfile 'switch.conf'
-        dstfile 'running_config'
-        vrf_name 'management'
+  file 'switch.yml'
+  type 'download'
+  protocol 'tftp'
+  serverip '192.168.1.1'
+  srcfile 'switch.conf'
+  dstfile 'running_config'
+  vrf_name 'management'
 end
 ```
 
@@ -79,7 +78,7 @@ This recipe upload new OS image to the switch. <br /><br />
 
 Example - using attributes
 
-```
+```ruby
 cnos_downloadImage 'image' do
   file     node['cnos']['file']
   protocol node['cnos']['protocol']
@@ -92,14 +91,14 @@ end
 
 Example - using values
 
-```
-s_downloadImage 'image' do
-        file     'switch.yml'
-        protocol 'tftp'
-        serverip '192.168.1.1'
-        srcfile  'G8296-CNOS-10.4.2.0.img'
-        imgtype  'all'
-        vrf_name 'management'
+```ruby
+cnos_downloadImage 'image' do
+  file     'switch.yml'
+  protocol 'tftp'
+  serverip '192.168.1.1'
+  srcfile  'G8296-CNOS-10.4.2.0.img'
+  imgtype  'all'
+  vrf_name 'management'
 end
 ```
 
@@ -108,7 +107,7 @@ This recipe manages the VLAN (create/update/delete) provisiong on the switch.<br
 
 Example - using attributes
 
-```
+```ruby
 cnos_vlan '21' do
   file        node['cnos']['file']
   vlan        21
@@ -120,13 +119,13 @@ end
 
 Example - using values
 
-```
+```ruby
 cnos_vlan '21' do
-        file 'switch.yml'
-        vlan 21
-        vlan_name 'vlan21'
-        admin_state 'up'
-        type 'create'
+  file 'switch.yml'
+  vlan 21
+  vlan_name 'vlan21'
+  admin_state 'up'
+  type 'create'
 end
 ```
 
@@ -137,7 +136,7 @@ port-channel interfaces.<br /><br />
 
 Example - using attributes
 
-```
+```ruby
 cnos_vlanIntf 'Ethernet1/1' do
   file            node['cnos']['file']
   interface       'Ethernet1/1'
@@ -149,22 +148,23 @@ end
 
 Example - using values
 
-```
+```ruby
 cnos_vlanIntf 'Ethernet1/1' do
-        file 'switch.yml'
-        interface 'Ethernet1/1'
-        bridgeport_mode 'trunk'
-        pvid 1
-        vlans [20,21]
+  file 'switch.yml'
+  interface 'Ethernet1/1'
+  bridgeport_mode 'trunk'
+  pvid 1
+  vlans [20,21]
 end
 ```
+
 ### 6. ipIntf
 
 This recipe provides the management of IP interfaces.<br /><br />
 
 Example - using attributes
 
-```
+```ruby
 cnos_ipIntf '1' do
   file          node['cnos']['file']
   if_name       'Ethernet1/1'
@@ -179,16 +179,16 @@ end
 
 Example - using values
 
-```
+```ruby
 cnos_ipIntf '1' do
-        file 'switch.yml'
-        if_name 'Ethernet1/1'
-        bridge_port 'yes'
-        mtu '1500'
-        ip_addr '0.0.0.0'
-        ip_prefix_len 0
-        vrf_name 'default'
-        admin_state 'up'
+  file 'switch.yml'
+  if_name 'Ethernet1/1'
+  bridge_port 'yes'
+  mtu '1500'
+  ip_addr '0.0.0.0'
+  ip_prefix_len 0
+  vrf_name 'default'
+  admin_state 'up'
 end
 ```
 
@@ -204,7 +204,7 @@ end
 3. Create and transfer using recipe switch.yml for each Lenovo device to be configured using the work
    station, see below example file
 
-```
+```yaml
 transport : 'http' #http or https
 port : '8090' #8090 or 443
 ip : 'switch ip address' #Switch IP address
