@@ -24,6 +24,7 @@ default_action :create
 begin
   require 'cnos-rbapi/connect'
   require 'cnos-rbapi/vlan_intf'
+  require 'yaml'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end
@@ -44,8 +45,9 @@ default_action :create
 #           end
 
 action :create do
-  filename = "#{ENV['HOME']}/" + file 
-  switch = Connect.new(filename)
+  filename = "#{ENV['HOME']}/" + file
+  param = YAML.load_file(filename) 
+  switch = Connect.new(param)
   params = { 'if_name' => interface,
              'bridgeport_mode' => bridgeport_mode,
              'pvid' => pvid,

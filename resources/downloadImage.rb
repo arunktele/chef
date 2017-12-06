@@ -27,6 +27,7 @@ default_action :create
 begin
   require 'cnos-rbapi/connect'
   require 'cnos-rbapi/system'
+  require 'yaml'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end
@@ -44,7 +45,8 @@ end
 
 action :create do
   filename = "#{ENV['HOME']}/" + file 
-  switch = Connect.new(filename)
+  param = YAML.load_file(filename)
+  switch = Connect.new(param)
   if protocol == 'sftp'
     params = { 'protocol' => protocol,
                'serverip' => serverip,

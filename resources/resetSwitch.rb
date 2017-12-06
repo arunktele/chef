@@ -20,6 +20,7 @@ default_action :create
 begin
   require 'cnos-rbapi/connect'
   require 'cnos-rbapi/system'
+  require 'yaml'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end
@@ -31,8 +32,9 @@ end
 #	end
 
 action :create do
-  filename = "#{ENV['HOME']}/" + file 
-  switch = Connect.new(filename)
+  filename = "#{ENV['HOME']}/" + file
+  param = YAML.load_file(filename) 
+  switch = Connect.new(param)
   System.reset_switch(switch)
   Chef::Log.info "\n\n>>>Reset Switch " + switch.getIp + ' in progress<<<'
 end

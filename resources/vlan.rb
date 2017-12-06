@@ -24,6 +24,7 @@ default_action :create
 begin
   require 'cnos-rbapi/connect'
   require 'cnos-rbapi/vlan'
+  require 'yaml'
 rescue LoadError
   Chef::Log.debug 'Failed to require rubygem'
 end
@@ -38,7 +39,8 @@ end
 #	    end
 action :create do
   filename = "#{ENV['HOME']}/" + file
-  switch = Connect.new(filename)
+  param = YAML.load_file(filename)
+  switch = Connect.new(param)
   if type == 'create'
     params = { 'vlan_name' => vlan_name,
                'vlan_id' => vlan,
@@ -56,6 +58,7 @@ end
 # delete vlan
 action :delete do
   filename = "#{ENV['HOME']}/" + file
-  switch = Connect.new(filename)
+  param = YAML.load_file(filename)
+  switch = Connect.new(param)
   Vlan.delete_vlan(switch, vlan)
 end
