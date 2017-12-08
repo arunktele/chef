@@ -203,6 +203,7 @@ end
 2. Install Lenovo CNOS Ruby GEM in the same node(or include in default recipe).
 3. Create and transfer using recipe switch.yml for each Lenovo device to be configured using the work
    station, see below example file
+The file can be parsed to create a dictionary which is passed to the Ruby API's to create the connect object.
 
 ```yaml
 transport : 'http' #http or https
